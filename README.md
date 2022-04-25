@@ -3,7 +3,9 @@
 This is my first full stack web project. The purpose is to create a simple website that makes use of several different frameworks and concepts to learn about backend web development. The following tools were used in this project:
 - Python
 - Flask
-- HTML
+- HTML & CSS
+- JavaScript
+- sqlalchemy
 
 ## Getting Started
 To run the website on local follow the following steps on macOS. 
