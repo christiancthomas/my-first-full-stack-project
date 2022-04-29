@@ -23,7 +23,7 @@
         />
 
         <title>
-            {% block title %}Home{% endblock %} <!-- This is used to _____. -->
+            {% block title %}Home{% endblock %}
         </title>
     </head>
     <body> <!-- Load JavaScript related to Bootstrap -->
@@ -39,13 +39,37 @@
             <!-- Define navbar and its properties -->
             <div class="collapse navbar-collapse" id="navbar">
               <div class="navbar-nav">
+                {% if user.is_authenticated %}
                 <a class="nav-item nav-link" id="home" href="/">Home</a>
                 <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+                {% else %}
                 <a class="nav-item nav-link" id="login" href="/login">Login</a>
                 <a class="nav-item nav-link" id="signup" href="/signup">Sign Up</a>
+                {% endif %}
               </div>
             </div>
           </nav>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              {% if category == 'error' %}
+              <div class="alert alert-danger alert-dismissable fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              {% else %}
+              <div class="alert alert-success alert-dismissable fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
           <div class="container">
               <!-- Anything we put in here will render in base.html. It also allows us to override it elsewhere. -->
               {% block content %}
